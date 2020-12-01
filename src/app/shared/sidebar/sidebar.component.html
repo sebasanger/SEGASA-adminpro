@@ -38,8 +38,20 @@
             ></a
           >
           <ul aria-expanded="false" class="collapse">
-            <li><a href="index.html">Minimal </a></li>
-            <li><a href="index2.html">Analytical</a></li>
+            <li>
+              <a
+                [routerLink]="['/dashboard/grafica1']"
+                routerLinkActive="active"
+                >Graficos
+              </a>
+            </li>
+            <li>
+              <a
+                [routerLink]="['/dashboard/progress']"
+                routerLinkActive="active"
+                >Progress</a
+              >
+            </li>
             <li><a href="index3.html">Demographical</a></li>
             <li><a href="index4.html">Modern</a></li>
           </ul>
