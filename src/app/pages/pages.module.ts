@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
     PagesComponent,
     DashboardComponent,
     AccountSettingComponent,
+    PromesasComponent,
+    RxjsComponent,
   ],
   exports: [
     ProgressComponent,
@@ -27,6 +31,8 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
     PagesComponent,
     DashboardComponent,
     AccountSettingComponent,
+    PromesasComponent,
+    RxjsComponent,
   ],
   imports: [
     CommonModule,
