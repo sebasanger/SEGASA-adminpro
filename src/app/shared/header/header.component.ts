@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -8,10 +9,12 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styles: [],
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    private _usuarioService: UsuarioService,
-    private router: Router
-  ) {}
+  public usuario: Usuario;
+  public imgUrl = '';
+  constructor(private _usuarioService: UsuarioService, private router: Router) {
+    this.imgUrl = _usuarioService.usuario.getImagen;
+    this.usuario = _usuarioService.usuario;
+  }
   logout() {
     this._usuarioService.logout();
     this.router.navigateByUrl('/login');
