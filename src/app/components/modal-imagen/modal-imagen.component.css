@@ -1,0 +1,20 @@
+.fondo-modal-imagen {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+.oculto {
+  display: none;
+}
+
+.cambiar-imagen {
+  width: 250px;
+}
+.cambiar-imagen img {
+  max-width: 100%;
+}

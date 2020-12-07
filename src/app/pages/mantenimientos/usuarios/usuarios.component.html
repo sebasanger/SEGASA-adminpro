@@ -1,0 +1,103 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar usuario... "
+          #txtFiltro
+          (keyup)="buscar(txtFiltro.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="cargando" class="row animated fadeIn">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!cargando" class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Usuarios</h4>
+        <h6 class="card-subtitle">
+          Total de usuarios:({{ totalUsuarios }})
+          <p class="text-right">{{ desde }}/{{ viendo }}</p>
+        </h6>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="w100">Avatar</th>
+                <th>Correo</th>
+                <th>Nombre</th>
+                <th class="w100">Role</th>
+                <th class="text-nowrap w100">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarios; let i = index">
+                <td class="avatarimg text-center">
+                  <img
+                    [src]="usuario.getImagen"
+                    alt="imagen del usuario"
+                    class="cursor"
+                    (click)="abrirModalImagen(usuario)"
+                  />
+                </td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>
+                  <select
+                    (change)="cambiarRole(usuario)"
+                    class="form-control w200"
+                    [(ngModel)]="usuario.role"
+                  >
+                    <option value="USER_ROLE">USER_ROLE</option>
+                    <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                  </select>
+                </td>
+                <td class="text-center">
+                  <a
+                    class="cursor"
+                    (click)="eliminarUsuario(usuario, i)"
+                    data-toggle="tooltip"
+                    data-original-title="Borrar"
+                  >
+                    <i class="fa fa-close text-danger"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-right">
+          <button
+            (click)="cambiarPagina(-totalPorPagina)"
+            [disabled]="desde < 1"
+            class="btn btn-outline-info"
+          >
+            Anteriores
+          </button>
+          &nbsp;
+          <button
+            (click)="cambiarPagina(totalPorPagina)"
+            [disabled]="viendo >= totalUsuarios"
+            class="btn btn-outline-info"
+          >
+            Siguientes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
