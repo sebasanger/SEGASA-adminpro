@@ -21,6 +21,9 @@ export class UsuarioService {
   get uid() {
     return this.usuario.uid || '';
   }
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  }
 
   get headerToken() {
     return { headers: { 'x-token': this.token } };
@@ -30,8 +33,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`, formData).pipe(
       tap((res: any) => {
         localStorage.setItem('id', res.usuario.uid);
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', JSON.stringify(res.usuario));
+        this.guardarLocalStorage(res.token, res.menu, res.usuario);
       })
     );
   }
@@ -44,9 +46,7 @@ export class UsuarioService {
     }
     return this.http.post(`${base_url}/login`, usuario).pipe(
       tap((res: any) => {
-        localStorage.setItem('id', res.usuario.uid);
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', JSON.stringify(res.usuario));
+        this.guardarLocalStorage(res.token, res.menu, res.usuario);
       })
     );
   }
@@ -56,7 +56,7 @@ export class UsuarioService {
       map((res: any) => {
         const { nombre, email, role, uid, img = '' } = res.usuario;
         this.usuario = new Usuario(nombre, email, '', uid, role, img);
-        localStorage.setItem('token', res.token);
+        this.guardarLocalStorage(res.token, res.menu);
         return true;
       }),
       catchError((err) => {
@@ -77,6 +77,7 @@ export class UsuarioService {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('menu');
   }
 
   cargarUsuarios(desde: number = 0, total: number = 5) {
@@ -108,5 +109,13 @@ export class UsuarioService {
       usuario,
       this.headerToken
     );
+  }
+
+  guardarLocalStorage(token: string, menu: any, usuario?: Usuario) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
+    if (usuario) {
+      localStorage.setItem('usuario', JSON.stringify(usuario));
+    }
   }
 }

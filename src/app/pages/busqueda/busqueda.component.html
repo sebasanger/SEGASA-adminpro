@@ -1,0 +1,103 @@
+<div class="row animated fadeIn fast">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3>Usuarios</h3>
+        <div class="alert alert-info">
+          <p class="mb-0" *ngIf="usuarios.length === 0">
+            No hay usuarios con ese filtro
+          </p>
+        </div>
+        <div class="table-responsive" *ngIf="usuarios.length !== 0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarios" class="animated fadeIn">
+                <td class="avatarimg">
+                  <img
+                    [src]="usuario.img | mostrarImagen: 'usuarios'"
+                    alt="imagen del usuario"
+                  />
+                </td>
+                <td>{{ usuario.nombre }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3>Medicos</h3>
+        <div class="alert alert-info">
+          <p class="mb-0" *ngIf="medicos.length === 0">
+            No hay medicos con ese filtro
+          </p>
+        </div>
+        <div class="table-responsive" *ngIf="medicos.length !== 0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Hospital</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let medico of medicos" class="animated fadeIn">
+                <td class="avatarimg">
+                  <img
+                    [src]="medico.img | mostrarImagen: 'medicos'"
+                    alt="imagen del usuario"
+                  />
+                </td>
+                <td>{{ medico.nombre }}</td>
+                <td>{{ medico.hospital.nombre }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3>Hospitales</h3>
+        <div class="alert alert-info">
+          <p class="mb-0" *ngIf="hospitales.length === 0">
+            No hay hospitales con ese filtro
+          </p>
+        </div>
+        <div class="table-responsive" *ngIf="hospitales.length !== 0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hospital of hospitales" class="animated fadeIn">
+                <td class="avatarimg">
+                  <img
+                    [src]="hospital.img | mostrarImagen: 'hospitales'"
+                    alt="imagen del hospital"
+                  />
+                </td>
+                <td>{{ hospital.nombre }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

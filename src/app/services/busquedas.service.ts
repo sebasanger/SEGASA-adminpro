@@ -17,6 +17,10 @@ export class BusquedasService {
     return { headers: { 'x-token': this.token } };
   }
 
+  busquedaGlobal(filtro: string) {
+    return this.http.get(`${base_url}/todo/${filtro}`, this.headerToken);
+  }
+
   filtrar(tipo: 'usuarios' | 'medicos' | 'hospitales', filtro: string) {
     const url = `${base_url}/todo/coleccion/${tipo}/${filtro}`;
     return this.http.get(url, this.headerToken).pipe(

@@ -18,13 +18,10 @@ export class RegisterComponent implements OnInit {
 
   public registerForm = this.formBuilder.group(
     {
-      nombre: ['sebastian', [Validators.required, Validators.minLength(2)]],
-      email: [
-        'seba_sanger@hotmail.com',
-        [Validators.required, Validators.email],
-      ],
-      password: ['123456', [Validators.required, Validators.minLength(3)]],
-      password2: ['123456', [Validators.required, Validators.minLength(3)]],
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
+      password2: ['', [Validators.required, Validators.minLength(3)]],
       terminos: [false, [Validators.requiredTrue]],
     },
     { validators: this.passwordIguales('password', 'password2') }
@@ -37,11 +34,10 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    console.log(this.registerForm.value);
     this._usuarioService.crearUsuario(this.registerForm.value).subscribe(
       (res: any) => {
         Swal.fire('Bienvenido', res.usuario.nombre, 'success');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/login');
       },
       (err) => {
         Swal.fire('Error', err.error.mensaje, 'error');
