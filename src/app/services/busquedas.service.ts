@@ -24,7 +24,9 @@ export class BusquedasService {
         switch (tipo) {
           case 'usuarios':
             return this.transformarUsuarios(res.resultado);
-            break;
+
+          case 'medicos':
+            return res.resultado;
 
           default:
             break;
